@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Houston Is a Hockey Town — Documentary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IM+Fell+English:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* AEROS COLOR SCHEME
+   WHA Aeros: Navy #0b1624, Gold #c8922a, White/Ice
+   Secondary: Deep green for IHL era accents
+*/
+:root {
+  --navy:       #080f1c;
+  --navy-mid:   #0d1a2e;
+  --navy-light: #112236;
+  --gold:       #4a90d4;
+  --gold-light: #7ab8e8;
+  --gold-dim:   rgba(74,144,212,0.22);
+  --ice:        #ffffff;
+  --text:       #ccd8e8;
+  --text-dim:   #5a6e80;
+  --border:     rgba(74,144,212,0.2);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--navy); color:var(--text); font-family:'Playfair Display',Georgia,serif; overflow-x:hidden; }
+body::before {
+  content:''; position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:9999; opacity:0.28;
+}
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:rgba(11,22,36,0.97); backdrop-filter:blur(8px);
+  padding:1.1rem 3rem; display:flex; align-items:center; justify-content:space-between;
+  border-bottom:1px solid rgba(74,144,212,0.15);
+}
+.nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.35rem; letter-spacing:.1em; color:var(--gold); text-decoration:none; }
+.nav-links { display:flex; gap:2.2rem; list-style:none; }
+.nav-links a { font-family:'Space Mono',monospace; font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--text-dim); text-decoration:none; transition:color .2s; }
+.nav-links a:hover { color:var(--gold); }
+
+/* HERO */
+.hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden; padding:0 2rem; text-align:center; }
+.hero-bg {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 35%, rgba(74,144,212,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 45% at 15% 90%, rgba(24,40,64,0.4) 0%, transparent 60%),
+    linear-gradient(165deg, #0e1b2c 0%, #090f18 55%, #0b1624 100%);
+}
+.hero-bg::after {
+  content:''; position:absolute; inset:0;
+  background-image:
+    repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(74,144,212,0.025) 79px,rgba(74,144,212,0.025) 80px),
+    repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(74,144,212,0.015) 79px,rgba(74,144,212,0.015) 80px);
+}
+.hero-eyebrow { font-family:'Space Mono',monospace; font-size:.6rem; letter-spacing:.32em; text-transform:uppercase; color:var(--gold); margin-bottom:1.8rem; display:flex; align-items:center; gap:1rem; opacity:0; animation:fadeUp .8s ease .3s forwards; }
+.hero-eyebrow::before,.hero-eyebrow::after { content:''; display:block; width:36px; height:1px; background:var(--gold); opacity:.5; }
+.hero-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(3.8rem,13vw,10.5rem); letter-spacing:.04em; line-height:.9; color:var(--ice); opacity:0; animation:fadeUp .9s ease .5s forwards; }
+.hero-title .acc { display:block; color:var(--gold); }
+.hero-sub { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(.95rem,2.2vw,1.35rem); color:var(--text-dim); margin-top:1.6rem; opacity:0; animation:fadeUp .9s ease .7s forwards; }
+.hero-recog {
+  margin-top:1.1rem;
+  display:inline-flex;
+  align-items:center;
+  gap:.55rem;
+  border:1px solid var(--border);
+  background:rgba(8,15,28,.58);
+  color:var(--text-dim);
+  font-family:'Space Mono',monospace;
+  font-size:.56rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  padding:.5rem .85rem;
+  opacity:0;
+  animation:fadeUp .9s ease .82s forwards;
+}
+.hero-recog .dot { width:6px; height:6px; border-radius:50%; background:var(--gold); box-shadow:0 0 10px rgba(74,144,212,.6); }
+.hero-recog strong { color:var(--gold); font-weight:700; }
+.hero-recog .src { transition:opacity .25s ease; }
+.hero-tag { font-family:'Space Mono',monospace; font-size:.65rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-top:2.5rem; padding:.55rem 1.4rem; border:1px solid var(--border); display:inline-block; opacity:0; animation:fadeUp .9s ease .9s forwards; }
+.hero-scroll { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); font-family:'Space Mono',monospace; font-size:.52rem; letter-spacing:.28em; text-transform:uppercase; color:var(--text-dim); opacity:0; animation:fadeIn 1s ease 1.4s forwards; display:flex; flex-direction:column; align-items:center; gap:.6rem; }
+.hero-scroll::after { content:''; display:block; width:1px; height:38px; background:linear-gradient(to bottom, var(--gold), transparent); animation:scrollPulse 2.2s ease infinite; }
+
+/* TRAILER */
+.trailer-wrap { background:var(--navy-mid); padding:5rem 2rem; display:flex; flex-direction:column; align-items:center; position:relative; }
+.trailer-wrap::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, var(--gold), transparent); opacity:.35; }
+.trailer-frame { width:100%; max-width:880px; aspect-ratio:16/9; background:#000; border:1px solid var(--border); overflow:hidden; }
+.trailer-ph { width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; background:linear-gradient(135deg,#0b1624 0%,#141f2e 100%); cursor:pointer; gap:1.5rem; }
+.play-ring { width:70px; height:70px; border:2px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all .3s; }
+.play-ring::after { content:''; width:0; height:0; border-top:11px solid transparent; border-bottom:11px solid transparent; border-left:19px solid var(--gold); margin-left:4px; }
+.trailer-ph:hover .play-ring { background:var(--gold); transform:scale(1.1); }
+.trailer-ph:hover .play-ring::after { border-left-color:var(--navy); }
+.play-lbl { font-family:'Space Mono',monospace; font-size:.62rem; letter-spacing:.25em; text-transform:uppercase; color:var(--text-dim); }
+
+/* SHARED */
+.sec-lbl { font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem; display:flex; align-items:center; gap:.8rem; }
+.sec-lbl::after { content:''; display:block; width:48px; height:1px; background:var(--border); }
+h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.2rem,5vw,3.4rem); letter-spacing:.04em; color:var(--ice); line-height:1; margin-bottom:1.5rem; }
+p { font-size:1.02rem; line-height:1.8; color:var(--text); margin-bottom:1.1rem; }
+.gold-rule { width:100%; height:1px; border:none; background:linear-gradient(to right,transparent,var(--gold),transparent); opacity:.3; margin:0; }
+
+/* SYNOPSIS */
+#synopsis { max-width:920px; margin:0 auto; padding:5rem 2rem; border-left:2px solid var(--gold); padding-left:2.5rem; }
+.syn-q { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(1.2rem,2.8vw,1.7rem); color:var(--ice); line-height:1.5; margin-bottom:2rem; }
+
+/* ACTS */
+.acts-outer { background:var(--navy-mid); padding:5rem 0; position:relative; }
+.acts-outer::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent); opacity:.3; }
+.acts-inner { max-width:960px; margin:0 auto; padding:0 2rem; }
+.acts-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2px; margin-top:2.8rem; }
+.act-card { background:var(--navy-light); padding:2rem 1.7rem; border-top:2px solid transparent; transition:border-color .3s,background .3s; }
+.act-card:hover { border-top-color:var(--gold); background:#0f2038; }
+.act-num { font-family:'Bebas Neue',sans-serif; font-size:2.8rem; color:rgba(74,144,212,0.18); line-height:1; margin-bottom:.4rem; transition:color .3s; }
+.act-card:hover .act-num { color:rgba(74,144,212,0.38); }
+.act-title { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:.05em; color:#7ab8e8; margin-bottom:.7rem; }
+.act-desc { font-size:.87rem; line-height:1.65; color:var(--text-dim); margin:0; }
+
+/* PULL QUOTE */
+.pull-q { max-width:880px; margin:0 auto; padding:5rem 2rem; text-align:center; position:relative; }
+.pull-q::before { content:'\201C'; font-family:'IM Fell English',serif; font-size:14rem; color:rgba(74,144,212,0.05); position:absolute; top:.5rem; left:50%; transform:translateX(-50%); line-height:1; pointer-events:none; }
+.pull-q blockquote { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(1.4rem,3.5vw,2.1rem); color:var(--ice); line-height:1.45; position:relative; }
+.pull-q cite { display:block; font-family:'Space Mono',monospace; font-style:normal; font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-top:1.5rem; }
+
+/* VOICES */
+#voices { max-width:1000px; margin:0 auto; padding:5rem 2rem; }
+.voices-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; margin-top:2.5rem; }
+.voice-card { border:1px solid var(--border); background:var(--navy-light); overflow:hidden; transition:border-color .3s,transform .3s; }
+.voice-card:hover { border-color:var(--gold); transform:translateY(-3px); }
+.voice-photo { width:100%; aspect-ratio:4/3; background:var(--navy-mid); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.voice-photo img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; position:absolute; inset:0; }
+.voice-ph { display:flex; flex-direction:column; align-items:center; gap:.5rem; z-index:1; }
+.voice-ph svg { opacity:.3; }
+.voice-ph-lbl { font-family:'Space Mono',monospace; font-size:.52rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-dim); }
+.voice-photo input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; z-index:2; }
+.voice-body { padding:1.4rem 1.3rem; }
+.voice-name { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:.04em; color:var(--ice); margin-bottom:.25rem; }
+.voice-role { font-family:'Space Mono',monospace; font-size:.56rem; letter-spacing:.11em; text-transform:uppercase; color:var(--gold); line-height:1.5; margin-bottom:.8rem; }
+.voice-quote { font-family:'IM Fell English',serif; font-style:italic; font-size:.9rem; color:var(--text-dim); line-height:1.55; margin:0; }
+
+/* PRESS */
+#press { max-width:1000px; margin:0 auto; padding:5rem 2rem; }
+.press-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.1rem; margin-top:2rem; }
+.press-card { border:1px solid var(--border); background:var(--navy-light); padding:1.35rem 1.25rem; text-decoration:none; transition:border-color .25s,transform .25s,background .25s; }
+.press-card:hover { border-color:var(--gold); background:#0f2038; transform:translateY(-2px); }
+.press-type { font-family:'Space Mono',monospace; font-size:.52rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:.65rem; }
+.press-title { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:.04em; color:var(--ice); line-height:1.05; margin-bottom:.55rem; }
+.press-note { font-size:.82rem; line-height:1.6; color:var(--text-dim); margin:0; }
+
+/* DIRECTOR STATEMENT */
+#statement { max-width:920px; margin:0 auto; padding:5rem 2rem; border-left:2px solid var(--gold); padding-left:2.5rem; }
+.stmt-by { font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:.17em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem; }
+
+/* TIMELINE */
+.tl-outer { background:var(--navy-mid); padding:5rem 0; position:relative; }
+.tl-outer::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent); opacity:.28; }
+.tl-inner { max-width:920px; margin:0 auto; padding:0 2rem; }
+.tl-track { margin-top:3rem; padding-left:2.2rem; border-left:1px solid rgba(74,144,212,0.2); }
+.tl-event { margin-bottom:3rem; position:relative; }
+.tl-event::before { content:''; position:absolute; left:-2.55rem; top:.5rem; width:9px; height:9px; border-radius:50%; background:var(--gold); box-shadow:0 0 10px rgba(74,144,212,0.6); }
+.tl-year { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.14em; color:var(--gold); margin-bottom:.3rem; }
+.tl-desc { font-size:.92rem; color:var(--text-dim); line-height:1.65; margin:0 0 .9rem; }
+.tl-photo { width:100%; max-width:500px; aspect-ratio:4/3; background:var(--navy-light); border:1px dashed rgba(74,144,212,0.3); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem; margin-top:.8rem; cursor:pointer; transition:border-color .3s,background .3s; position:relative; overflow:hidden; }
+.tl-photo:hover { border-color:var(--gold); background:var(--navy); }
+.tl-photo img { width:100%; height:100%; object-fit:cover; display:block; position:absolute; inset:0; }
+.tl-photo-ph { display:flex; flex-direction:column; align-items:center; gap:.6rem; z-index:1; }
+.tl-photo-ph svg { opacity:.3; }
+.tl-photo-txt { font-family:'Space Mono',monospace; font-size:.54rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-dim); text-align:center; padding:0 1rem; }
+.tl-photo input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; z-index:2; }
+
+/* DIRECTOR / CREW */
+#director { max-width:960px; margin:0 auto; padding:5rem 2rem; }
+.dir-grid { display:grid; grid-template-columns:220px 1fr; gap:3rem; align-items:start; }
+.dir-name { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:.04em; color:var(--ice); margin-bottom:.25rem; }
+.dir-title { font-family:'Space Mono',monospace; font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1.4rem; }
+.crew-section { margin-top:4rem; }
+.crew-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2rem; margin-top:2.2rem; }
+.crew-card { display:flex; flex-direction:column; gap:.8rem; }
+.crew-role { font-family:'Space Mono',monospace; font-size:.56rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); }
+.crew-cname { font-family:'Bebas Neue',sans-serif; font-size:1.2rem; letter-spacing:.03em; color:var(--ice); }
+.crew-note { font-size:.83rem; line-height:1.6; color:var(--text-dim); margin:0; }
+
+/* Photo slots shared */
+.photo-slot { background:var(--navy-mid); border:1px solid var(--border); overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem; position:relative; cursor:pointer; transition:border-color .3s; }
+.photo-slot:hover { border-color:var(--gold); }
+.photo-slot img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; position:absolute; inset:0; }
+.photo-slot .ph-inner { display:flex; flex-direction:column; align-items:center; gap:.5rem; z-index:1; }
+.photo-slot .ph-inner svg { opacity:.25; }
+.photo-slot .ph-lbl { font-family:'Space Mono',monospace; font-size:.52rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-dim); }
+.photo-slot input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; z-index:2; }
+.slot-dir { width:220px; aspect-ratio:3/4; }
+.slot-sq { width:100%; aspect-ratio:1; }
+
+/* CTA */
+.cta-outer { background:var(--navy-mid); padding:5.5rem 2rem; text-align:center; position:relative; overflow:hidden; }
+.cta-outer::before { content:'HOUSTON'; position:absolute; font-family:'Bebas Neue',sans-serif; font-size:20vw; color:rgba(74,144,212,0.03); top:50%; left:50%; transform:translate(-50%,-50%); white-space:nowrap; pointer-events:none; letter-spacing:.1em; }
+.cta-inner { max-width:600px; margin:0 auto; position:relative; }
+.cta-body { font-family:'IM Fell English',serif; font-style:italic; font-size:1.1rem; color:var(--text); line-height:1.75; margin-bottom:2rem; }
+.cta-email { font-family:'Bebas Neue',sans-serif; font-size:1.55rem; letter-spacing:.1em; color:var(--gold); text-decoration:none; border-bottom:1px solid var(--border); padding-bottom:.25rem; transition:color .2s,border-color .2s; }
+.cta-email:hover { color:#7ab8e8; border-color:#7ab8e8; }
+.cta-phone { display:block; font-family:'Space Mono',monospace; font-size:.68rem; letter-spacing:.2em; color:var(--text-dim); margin-top:.9rem; }
+
+/* FOOTER */
+footer { background:#080f18; border-top:1px solid var(--border); padding:1.8rem 2.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+.footer-logo { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:.1em; color:var(--gold); }
+.footer-copy { font-family:'Space Mono',monospace; font-size:.56rem; letter-spacing:.12em; color:var(--text-dim); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+@keyframes scrollPulse { 0%,100%{opacity:.5;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.15)} }
+
+@media(max-width:700px){
+  nav{padding:1rem 1.2rem}
+  .nav-links{display:none}
+  .dir-grid{grid-template-columns:1fr}
+  .slot-dir{width:100%;aspect-ratio:16/9}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">HIAHT</a>
+  <ul class="nav-links">
+    <li><a href="#synopsis">Synopsis</a></li>
+    <li><a href="#acts-wrap">The Film</a></li>
+    <li><a href="#voices">Voices</a></li>
+    <li><a href="#press">Press</a></li>
+    <li><a href="#statement">Statement</a></li>
+    <li><a href="#director">Director</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-eyebrow">Documentary</div>
+  <h1 class="hero-title">Houston Is<br><span class="acc">A Hockey Town</span></h1>
+  <p class="hero-sub">The largest city without a professional hockey team. <em>For now.</em></p>
+  <div class="hero-recog">
+    <span class="dot"></span>
+    <span>Recognized by <strong class="src" id="rec-source">The Howe Foundation</strong></span>
+  </div>
+  <div class="hero-tag">A Film by Evan Shi</div>
+  <div class="hero-scroll">Scroll</div>
+</div>
+
+<!-- TRAILER -->
+<div class="trailer-wrap">
+  <div class="sec-lbl">Documentary Preview</div>
+  <h2 style="margin-bottom:1.2rem">Official Teaser Trailer</h2>
+  <div class="trailer-frame">
+    <iframe
+      id="trailer-iframe"
+      title="YouTube video player"
+      frameborder="0"
+      style="width:100%;height:100%;display:block;"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+      referrerpolicy="origin-when-cross-origin"
+      allowfullscreen></iframe>
+  </div>
+</div>
+
+<hr class="gold-rule">
+
+<!-- CTA -->
+<div id="contact">
+<div class="cta-outer">
+  <div class="cta-inner">
+    <div class="sec-lbl" style="justify-content:center">Get Involved</div>
+    <h2 style="margin-bottom:1.5rem">This Story<br>Needs You</h2>
+    <p class="cta-body">If you have archival footage, photographs, or stories from Houston's hockey history, or would like to support the full documentary in any way, please reach out. The film will provide credit for your contributions.</p>
+    <a href="/cdn-cgi/l/email-protection#254053444b564d4c151d1713654248444c490b464a48" class="cta-email"><span class="__cf_email__" data-cfemail="f99c8f98978a9190c9c1cbcfb99e94989095d79a9694">[email&#160;protected]</span></a>
+    <span class="cta-phone">(832) 388-5479</span>
+  </div>
+</div>
+</div>
+
+<hr class="gold-rule">
+
+<!-- SYNOPSIS -->
+<section id="synopsis">
+  <div class="sec-lbl">Synopsis</div>
+  <p class="syn-q">"Houston reveals and relives the forgotten hockey glory of the largest city without a professional hockey team, once at the center of the hockey world, now fighting to reclaim its place on the ice."</p>
+  <p>Houston Is a Hockey Town is an upcoming feature documentary tracing Houston's overlooked professional hockey history. Spanning from the city's earliest teams through the WHA Aeros dynasty, through the IHL and AHL Aeros era, to the passionate community keeping the sport alive today, the film combines archival footage, cinematic interviews, and animation to preserve one of the most unique sport stories that has never been formally documented.</p>
+  <p>This is a race against time. The people who lived it are aging. The archival materials are unpreserved. And the city, the fourth largest in the United States still has no NHL team.</p>
+</section>
+
+<hr class="gold-rule">
+
+<!-- ACTS -->
+<div id="acts-wrap">
+<div class="acts-outer">
+  <div class="acts-inner">
+    <div class="sec-lbl">The Film</div>
+    <h2>Six Acts of<br>The Houston Hockey Story</h2>
+    <div class="tl-track" style="margin-top:2.2rem">
+      <div class="tl-event">
+        <div class="tl-year">Act I — The Early Years</div>
+        <p class="tl-desc">Houston hockey quietly took root decades before anyone was paying attention. The Houston Skippers/Huskies, won a professional championship under the first-year coaching of Toe Blake, who would go on to become one of the most decorated coaches in NHL history. The Houston Apollos later carried the torch as a Montreal Canadiens farm club in the 1960s. Houston was already a hockey town. It just did not know it yet.</p>
+      </div>
+      <div class="tl-event">
+        <div class="tl-year">Act II — The WHA Aeros</div>
+        <p class="tl-desc">A rival league, which was initially dismissed, tapped into something Houston had been quietly building for years, signing one of the greatest hockey players alive, Gordie Howe, out of retirement, alongside his sons, to play in Texas. The Aeros won the championship, then won it again. They outdrew the Rockets, inspired the construction of a new arena, and captured a generation of loyal fans. By the time the era ended, the Aeros had not just captured a city; they had permanently changed how professional hockey viewed expansion markets, and their legacy remains on the sport to this day.</p>
+      </div>
+      <div class="tl-event">
+        <div class="tl-year">Act III — The Dark Ages</div>
+        <p class="tl-desc">When Houston was locked out of the NHL merger, the Aeros folded and the rinks started closing soon after. Adult and youth leagues shrank. The dark ages of Houston hockey had begun. But a core kept skating, sustained in part by an influx of transplants arriving during the oil boom who brought their love of the game with them. The CHL Apollos returned briefly and gave the remaining faithful somewhere to go.</p>
+      </div>
+      <div class="tl-event">
+        <div class="tl-year">Act IV — The Return of the Aeros</div>
+        <p class="tl-desc">In 1994 hockey came back with a new identity, a new aesthetic, and an audience that had never seen professional hockey in this city. A generation fell in love with the IHL/AHL Aeros the way the previous one had fallen in love with the WHA Aeros. Two more championships. A new culture built around a new team. And then, quietly, the same forces that had ended the WHA Aeros before began gathering again.</p>
+      </div>
+      <div class="tl-event">
+        <div class="tl-year">Act V — Present Passion</div>
+        <p class="tl-desc">When the AHL Aeros left in 2013, the expectation was a repeat of 1978. It did not happen. Driven by grassroots efforts across the community, Houston hockey grew in the absence of a professional team rather than declining. Youth hockey reached new highs. College hockey made its return. New rinks opened across the city. Hockey Day in Houston drew thousands and united generations of fans over a shared history. The numbers are now the best they have ever been. Houston is the largest city in the nation without an NHL team, and it has never been more ready for one.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- PULL QUOTE -->
+<div class="pull-q">
+  <blockquote>"The city has earned its right to have a franchise. The city is ready."</blockquote>
+  <cite>Jack Stanfield &nbsp; Houston Aeros Player and Vice President, 1972 to 1979</cite>
+</div>
+
+<hr class="gold-rule">
+
+<!-- VOICES -->
+<section id="voices">
+  <div class="sec-lbl">Voices</div>
+  <h2>The People<br>Who Lived It</h2>
+  <div class="voices-grid">
+
+    <div class="voice-card">
+      <div class="voice-photo">
+        <div class="voice-ph" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="voice-ph-lbl">Add Photo</span></div>
+        <img src="Photos/Jack_Stanfield.png" alt="Jack Stanfield">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'voice')">
+      </div>
+      <div class="voice-body">
+        <div class="voice-name">Jack Stanfield</div>
+        <div class="voice-role">Houston Aeros Player and Vice President, 1972 to 1979</div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-photo">
+        <div class="voice-ph" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="voice-ph-lbl">Add Photo</span></div>
+        <img src="Photos/Pat_Andrade.png" alt="Patrick Andrade">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'voice')">
+      </div>
+      <div class="voice-body">
+        <div class="voice-name">Patrick Andrade</div>
+        <div class="voice-role">Longtime Houston Hockey Fan and Coach, Since 1973</div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-photo">
+        <div class="voice-ph" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="voice-ph-lbl">Add Photo</span></div>
+        <img src="Photos/Dean_Hill.png" alt="Dean Hill">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'voice')">
+      </div>
+      <div class="voice-body">
+        <div class="voice-name">Dean Hill</div>
+        <div class="voice-role">Owner, Houston Hockey and Skate World</div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-photo">
+        <div class="voice-ph"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="voice-ph-lbl">Add Photo</span></div>
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'voice')">
+      </div>
+      <div class="voice-body">
+        <div class="voice-name">TC Lewis</div>
+        <div class="voice-role">General Manager, Willowbrook Airdrome</div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-photo">
+        <div class="voice-ph" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="voice-ph-lbl">Add Photo</span></div>
+        <img src="Photos/Mark_Howe_Photo.png" alt="Mark Howe">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'voice')">
+      </div>
+      <div class="voice-body">
+        <div class="voice-name">Mark Howe</div>
+        <div class="voice-role">Houston Aeros WHA Player, 1973 to 1977</div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-photo">
+        <div class="voice-ph" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="voice-ph-lbl">Add Photo</span></div>
+        <img src="Photos/Chie_Chie_Yard_Photo.png" alt="Chie Chie Yard">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'voice')">
+      </div>
+      <div class="voice-body">
+        <div class="voice-name">Chie Chie Yard</div>
+        <div class="voice-role">NHL Group VP of Events. First Native Houstonian to Play Olympic Hockey</div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-photo">
+        <div class="voice-ph" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="voice-ph-lbl">Add Photo</span></div>
+        <img src="Photos/Marty_Howe_Photo.png" alt="Marty Howe">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'voice')">
+      </div>
+      <div class="voice-body">
+        <div class="voice-name">Marty Howe</div>
+        <div class="voice-role">Houston Hockey Connection (Add details)</div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-photo">
+        <div class="voice-ph" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="voice-ph-lbl">Add Photo</span></div>
+        <img src="Photos/Terry_R_Photo.png" alt="Terry Ruskowski">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'voice')">
+      </div>
+      <div class="voice-body">
+        <div class="voice-name">Terry Ruskowski</div>
+        <div class="voice-role">Coached the Houston Aeros (Add details)</div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-photo">
+        <div class="voice-ph" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="voice-ph-lbl">Add Photo</span></div>
+        <img src="Photos/Pete_Dineen_Photo.png" alt="Peter Dineen">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'voice')">
+      </div>
+      <div class="voice-body">
+        <div class="voice-name">Peter Dineen</div>
+        <div class="voice-role">Representing Bill Dineen as Father</div>
+      </div>
+    </div>
+
+    <div class="voice-card">
+      <div class="voice-photo">
+        <div class="voice-ph" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="voice-ph-lbl">Add Photo</span></div>
+        <img src="Photos/Ron_Grahame_Photo.png" alt="Ron Grahame">
+        <input type="file" accept="image/*" onchange="loadPhoto(this,'voice')">
+      </div>
+      <div class="voice-body">
+        <div class="voice-name">Ron Grahame</div>
+        <div class="voice-role">Houston Hockey Connection (Add details)</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- PRESS -->
+<section id="press">
+  <div class="sec-lbl">Press</div>
+  <h2>Press and<br>Media</h2>
+  <div class="press-grid">
+    <a class="press-card" href="#" aria-label="Press kit">
+      <div class="press-type">Press Kit</div>
+      <div class="press-title">Official Press Kit</div>
+      <p class="press-note">Logline, synopsis, key credits, and approved stills for editors and producers.</p>
+    </a>
+    <a class="press-card" href="#" aria-label="Trailer and social assets">
+      <div class="press-type">Assets</div>
+      <div class="press-title">Trailer + Social Assets</div>
+      <p class="press-note">Download links for trailer embeds, poster art, and social-ready graphics.</p>
+    </a>
+    <a class="press-card" href="#" aria-label="Media inquiries">
+      <div class="press-type">Inquiries</div>
+      <div class="press-title">Media Contact</div>
+      <p class="press-note">For interviews and feature requests, use the contact details below.</p>
+    </a>
+  </div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- DIRECTOR STATEMENT -->
+<section id="statement">
+  <div class="sec-lbl">Director's Statement</div>
+  <h2>Director's<br>Note</h2>
+  <div class="stmt-by">By Evan Shi</div>
+  <p>They say the brain can barely hold memories before age five, but I remember the AHL Aeros clearly.</p>
+  <p>From age three to eighteen, I spent my youth in every league and team Houston had to offer. Growing up in Houston hockey's younger generation, I did not inherit the story all at once. I picked it up in fragments subconsciously over years, through conversations in locker rooms, coaches, stories from older players, hearing stories of Gordie Howe, the IHL Aeros, the present community legends. I grew up inside this story without fully understanding what it was and what it meant.</p>
+  <p>Slowly, without realizing it, I was piecing together a narrative that nobody had ever formally told, with the championships, the losses, the community that survived both. By the time I was old enough to understand what I had been hearing, I already knew the shape of the story, and I was old enough to do something about it.</p>
+  <p>Directing this film is my way of giving back to the community that raised me over the past fifteen years, but it is also something more than that. The more we conduct interviews, the more I realize that Houston's hockey history is genuinely one of the most compelling untold sports stories out there.</p>
+  <p>This film is the tangible version of everything I absorbed over eighteen years, taking what I pieced together and putting it on screen in a way that future generations do not have to figure out on their own, preserving our story for years to come.</p>
+  <p><em>Evan Shi, Director</em></p>
+</section>
+
+<hr class="gold-rule">
+
+<!-- DIRECTOR -->
+<section id="director">
+  <div class="sec-lbl">The Director</div>
+  <div class="dir-grid">
+    <div class="photo-slot slot-dir">
+      <div class="ph-inner" style="display:none"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="ph-lbl">Add Photo</span></div>
+      <img src="Photos/Evan_Shi.png" alt="Evan Shi">
+      <input type="file" accept="image/*" onchange="loadPhoto(this,'slot')">
+    </div>
+    <div>
+      <div class="dir-name">Evan Shi</div>
+      <div class="dir-title">Director / Producer / Writer / Editor</div>
+      <p><strong>Evan Shi</strong> is a filmmaker and hockey player from Houston, Texas, where he has spent over a decade immersed in the city's hockey community. Since age three he has played across Houston's youth and competitive leagues, including the Houston Wild, the Outlaws, and currently as captain of the Memorial West Varsity High School Team and assistant captain of the ISHL varsity select Houston Apollos. Beyond playing, he is a USA Hockey certified referee, a youth coach for Memorial City House League, and has appeared in a Beijing-based hockey television production.</p>
+      <p>Evan's filmmaking career began with a focus on preservation and cultural storytelling. His documentary received recognition from District 4 San José City Council-member David Cohen and the Global Asian Moon Fest red carpet event for its work documenting a gentrified Silicon Valley community. He has since directed films on endangered Chinese martial arts and currently serves as lead journalist and content creator for a nationally ranked collegiate ice hockey program, where he has built a 129-year historical archive and produced content for an audience of thousands.</p>
+      <p>Houston Is a Hockey Town represents the convergence of his two passions. His deep connection to Houston's hockey community, combined with his documentary experience, positions him to tell this story from an authentic insider perspective. This project marks his final season of competitive play in Houston as a high school senior, giving back to the community that raised him.</p>
+    </div>
+  </div>
+
+  <div class="crew-section">
+    <div class="sec-lbl">The Team</div>
+    <div class="crew-grid">
+
+      <div class="crew-card">
+        <div class="photo-slot slot-sq">
+          <div class="ph-inner" style="display:none"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="ph-lbl">Add Photo</span></div>
+          <img src="Photos/Ivan_Selever.png" alt="Ivan Selever">
+          <input type="file" accept="image/*" onchange="loadPhoto(this,'slot')">
+        </div>
+        <div class="crew-role">Co-Producer and Editor</div>
+        <div class="crew-cname">Ivan Selever</div>
+        <p class="crew-note">Ivan Selever was born in Czechoslovakia and raised in Houston, Texas. After discovering ice hockey in the early 1990s while living in Santa Fe, New Mexico, he returned to Houston and became an active part of the local community, skating in recreational leagues and coaching both youth and adult novice leagues. His professional career spans theater production, sports videography, corporate work, and short films. He and his wife were hired by HBO as extras for The Leftovers. His most recent work within the Houston hockey community includes serving as photographer and editor for the WHA 50th Anniversary event and producing the 2025 Houston Hockey Hall of Fame Induction Ceremony. Houston Is a Hockey Town is the most comprehensive documentation of Houston's hockey history he has been part of.</p>
+      </div>
+
+      <div class="crew-card">
+        <div class="photo-slot slot-sq">
+          <div class="ph-inner" style="display:none"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="ph-lbl">Add Photo</span></div>
+          <img src="Photos/Malinda_Selever.jpg" alt="Malinda Selever">
+          <input type="file" accept="image/*" onchange="loadPhoto(this,'slot')">
+        </div>
+        <div class="crew-role">Co-Producer, Fundraising and Marketing</div>
+        <div class="crew-cname">Malinda Selever</div>
+        <p class="crew-note">Malinda Selever serves as co-producer on Houston Is a Hockey Town, leading the project's fundraising strategy and marketing outreach. Her work is central to expanding the film's reach beyond the hockey community to the broader Houston audience the story deserves.</p>
+      </div>
+
+      <div class="crew-card">
+        <div class="photo-slot slot-sq">
+          <div class="ph-inner" style="display:none"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4a90d4" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="ph-lbl">Add Photo</span></div>
+          <img src="Photos/Matt.png" alt="Matt Savage">
+          <input type="file" accept="image/*" onchange="loadPhoto(this,'slot')">
+        </div>
+        <div class="crew-role">Co-Writer and Key Character</div>
+        <div class="crew-cname">Matt Savage</div>
+        <p class="crew-note">Matt Savage is a native Houstonian, American history teacher, and host of Mission Control: Houston's Hockey Podcast. His love of hockey began the night the IHL Aeros hosted a free Learn About Hockey event at the Summit before their inaugural season. When the Aeros left in 2013, Matt went looking for a Houston-focused hockey podcast and could not find one, so he started his own. Mission Control has grown into one of the city's most dedicated local hockey platforms, covering NHL expansion prospects, community events, and Aeros history with the depth of someone who genuinely lived it. He is a regular presence at University of Houston hockey games and Hockey Day in Houston.</p>
+      </div>
+
+    </div>
+
+    <div class="crew-section" style="margin-top:3.5rem">
+      <div class="sec-lbl">Additional Support</div>
+      <div class="crew-grid">
+        <div class="crew-card">
+          <div class="crew-role">Community + Events Support</div>
+          <div class="crew-cname">Lance Rosenberg</div>
+          <p class="crew-note">President of Hockey Day in Houston.</p>
+        </div>
+        <div class="crew-card">
+          <div class="crew-role">Support</div>
+          <div class="crew-cname">Olga Waln</div>
+          <p class="crew-note">Additional support.</p>
+        </div>
+        <div class="crew-card">
+          <div class="crew-role">Archival Footage</div>
+          <div class="crew-cname">Mark Kennedy</div>
+          <p class="crew-note">Archival footage support.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Houston Is a Hockey Town</span>
+  <span class="footer-copy">A Film by Evan Shi &nbsp; Website coded by Evan Shi &nbsp; Currently in Production &nbsp; 2026</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function loadPhoto(input, type) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    let container;
+    if (type === 'voice') container = input.closest('.voice-photo');
+    else if (type === 'tl')   container = input.closest('.tl-photo');
+    else                       container = input.closest('.photo-slot');
+    const ph = container.querySelector('.voice-ph, .tl-photo-ph, .ph-inner');
+    if (ph) ph.style.display = 'none';
+    let img = container.querySelector('img');
+    if (!img) { img = document.createElement('img'); container.insertBefore(img, input); }
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Embed the trailer directly (no click-to-preview overlay)
+  var iframe = document.getElementById('trailer-iframe');
+  if (iframe) {
+    // Replace YOUR_YOUTUBE_ID with your actual YouTube video ID
+    var ytId = '9zO6Cpr_uCQ';
+    var origin = window.location.origin;
+    if (!origin || origin === 'null') origin = 'http://localhost:5500';
+
+    var params = [
+      'autoplay=1',
+      'rel=0',
+      'modestbranding=1',
+      'playsinline=1',
+      'enablejsapi=1',
+      'origin=' + encodeURIComponent(origin),
+      'fs=1',
+      'iv_load_policy=3'
+    ].join('&');
+
+    var src = 'https://www.youtube-nocookie.com/embed/' + ytId + '?' + params;
+    iframe.src = src;
+  }
+
+  // Rotate recognized-by sources in the hero
+  var recEl = document.getElementById('rec-source');
+  if (recEl) {
+    var recSources = [
+      'The Howe Foundation',
+      'Hockey Day in Houston',
+      'ISHL',
+      'Texas Sports Network'
+    ];
+    var recIdx = 0;
+    setInterval(function() {
+      recIdx = (recIdx + 1) % recSources.length;
+      recEl.style.opacity = '0';
+      setTimeout(function() {
+        recEl.textContent = recSources[recIdx];
+        recEl.style.opacity = '1';
+      }, 180);
+    }, 2600);
+  }
+});
+
+// Smooth-scroll with offset for fixed nav
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+  anchor.addEventListener('click', function(e) {
+    var href = this.getAttribute('href');
+    if (!href || href === '#') return;
+    var el = document.querySelector(href);
+    if (!el) return;
+    e.preventDefault();
+    var nav = document.querySelector('nav');
+    var offset = nav ? nav.getBoundingClientRect().height + 10 : 0;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  });
+});
+
+</script>
+</body>
+</html>
