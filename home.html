@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Houston Is a Hockey Town — Documentary</title>
+<title>Houston Is a Hockey Town - Documentary</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IM+Fell+English:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -59,7 +59,7 @@ nav {
     repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(74,144,212,0.025) 79px,rgba(74,144,212,0.025) 80px),
     repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(74,144,212,0.015) 79px,rgba(74,144,212,0.015) 80px);
 }
-.hero-eyebrow { font-family:'Space Mono',monospace; font-size:.6rem; letter-spacing:.32em; text-transform:uppercase; color:var(--gold); margin-bottom:1.8rem; display:flex; align-items:center; gap:1rem; opacity:0; animation:fadeUp .8s ease .3s forwards; }
+.hero-eyebrow { font-family:'Space Mono',monospace; font-size:.78rem; letter-spacing:.32em; text-transform:uppercase; color:var(--gold); margin-bottom:1.8rem; display:flex; align-items:center; gap:1rem; opacity:0; animation:fadeUp .8s ease .3s forwards; }
 .hero-eyebrow::before,.hero-eyebrow::after { content:''; display:block; width:36px; height:1px; background:var(--gold); opacity:.5; }
 .hero-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(3.8rem,13vw,10.5rem); letter-spacing:.04em; line-height:.9; color:var(--ice); opacity:0; animation:fadeUp .9s ease .5s forwards; }
 .hero-title .acc { display:block; color:var(--gold); }
@@ -105,6 +105,9 @@ h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.2rem,5vw,3.4rem); le
 p { font-size:1.02rem; line-height:1.8; color:var(--text); margin-bottom:1.1rem; }
 .gold-rule { width:100%; height:1px; border:none; background:linear-gradient(to right,transparent,var(--gold),transparent); opacity:.3; margin:0; }
 
+/* Make the trailer's "Documentary Preview" label bigger without affecting all section labels */
+.trailer-wrap .sec-lbl { font-size:.74rem; }
+
 /* SYNOPSIS */
 #synopsis { max-width:920px; margin:0 auto; padding:5rem 2rem; border-left:2px solid var(--gold); padding-left:2.5rem; }
 .syn-q { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(1.2rem,2.8vw,1.7rem); color:var(--ice); line-height:1.5; margin-bottom:2rem; }
@@ -143,15 +146,6 @@ p { font-size:1.02rem; line-height:1.8; color:var(--text); margin-bottom:1.1rem;
 .voice-role { font-family:'Space Mono',monospace; font-size:.56rem; letter-spacing:.11em; text-transform:uppercase; color:var(--gold); line-height:1.5; margin-bottom:.8rem; }
 .voice-quote { font-family:'IM Fell English',serif; font-style:italic; font-size:.9rem; color:var(--text-dim); line-height:1.55; margin:0; }
 
-/* PRESS */
-#press { max-width:1000px; margin:0 auto; padding:5rem 2rem; }
-.press-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1.1rem; margin-top:2rem; }
-.press-card { border:1px solid var(--border); background:var(--navy-light); padding:1.35rem 1.25rem; text-decoration:none; transition:border-color .25s,transform .25s,background .25s; }
-.press-card:hover { border-color:var(--gold); background:#0f2038; transform:translateY(-2px); }
-.press-type { font-family:'Space Mono',monospace; font-size:.52rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:.65rem; }
-.press-title { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:.04em; color:var(--ice); line-height:1.05; margin-bottom:.55rem; }
-.press-note { font-size:.82rem; line-height:1.6; color:var(--text-dim); margin:0; }
-
 /* DIRECTOR STATEMENT */
 #statement { max-width:920px; margin:0 auto; padding:5rem 2rem; border-left:2px solid var(--gold); padding-left:2.5rem; }
 .stmt-by { font-family:'Space Mono',monospace; font-size:.58rem; letter-spacing:.17em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem; }
@@ -164,7 +158,7 @@ p { font-size:1.02rem; line-height:1.8; color:var(--text); margin-bottom:1.1rem;
 .tl-event { margin-bottom:3rem; position:relative; }
 .tl-event::before { content:''; position:absolute; left:-2.55rem; top:.5rem; width:9px; height:9px; border-radius:50%; background:var(--gold); box-shadow:0 0 10px rgba(74,144,212,0.6); }
 .tl-year { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.14em; color:var(--gold); margin-bottom:.3rem; }
-.tl-desc { font-size:.92rem; color:var(--text-dim); line-height:1.65; margin:0 0 .9rem; }
+.tl-desc { font-size:1rem; color:var(--text); line-height:1.75; margin:0 0 1rem; }
 .tl-photo { width:100%; max-width:500px; aspect-ratio:4/3; background:var(--navy-light); border:1px dashed rgba(74,144,212,0.3); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.6rem; margin-top:.8rem; cursor:pointer; transition:border-color .3s,background .3s; position:relative; overflow:hidden; }
 .tl-photo:hover { border-color:var(--gold); background:var(--navy); }
 .tl-photo img { width:100%; height:100%; object-fit:cover; display:block; position:absolute; inset:0; }
@@ -220,6 +214,12 @@ footer { background:#080f18; border-top:1px solid var(--border); padding:1.8rem 
   .nav-links{display:none}
   .dir-grid{grid-template-columns:1fr}
   .slot-dir{width:100%;aspect-ratio:16/9}
+  /* Prevent the director photo from getting cropped on mobile */
+  .slot-dir img{object-fit:contain;background:var(--navy-mid)}
+  /* Improve readability on small screens */
+  .tl-year{font-size:1.08rem}
+  .tl-desc{font-size:1.08rem;line-height:1.8}
+  p{font-size:1.08rem}
 }
 </style>
 </head>
@@ -231,7 +231,6 @@ footer { background:#080f18; border-top:1px solid var(--border); padding:1.8rem 
     <li><a href="#synopsis">Synopsis</a></li>
     <li><a href="#acts-wrap">The Film</a></li>
     <li><a href="#voices">Voices</a></li>
-    <li><a href="#press">Press</a></li>
     <li><a href="#statement">Statement</a></li>
     <li><a href="#director">Director</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -277,7 +276,7 @@ footer { background:#080f18; border-top:1px solid var(--border); padding:1.8rem 
     <div class="sec-lbl" style="justify-content:center">Get Involved</div>
     <h2 style="margin-bottom:1.5rem">This Story<br>Needs You</h2>
     <p class="cta-body">If you have archival footage, photographs, or stories from Houston's hockey history, or would like to support the full documentary in any way, please reach out. The film will provide credit for your contributions.</p>
-    <a href="/cdn-cgi/l/email-protection#254053444b564d4c151d1713654248444c490b464a48" class="cta-email"><span class="__cf_email__" data-cfemail="f99c8f98978a9190c9c1cbcfb99e94989095d79a9694">[email&#160;protected]</span></a>
+    <a href="mailto:hiahtdoc@gmail.com" class="cta-email">hiahtdoc@gmail.com</a>
     <span class="cta-phone">(832) 388-5479</span>
   </div>
 </div>
@@ -289,7 +288,7 @@ footer { background:#080f18; border-top:1px solid var(--border); padding:1.8rem 
 <section id="synopsis">
   <div class="sec-lbl">Synopsis</div>
   <p class="syn-q">"Houston reveals and relives the forgotten hockey glory of the largest city without a professional hockey team, once at the center of the hockey world, now fighting to reclaim its place on the ice."</p>
-  <p>Houston Is a Hockey Town is an upcoming feature documentary tracing Houston's overlooked professional hockey history. Spanning from the city's earliest teams through the WHA Aeros dynasty, through the IHL and AHL Aeros era, to the passionate community keeping the sport alive today, the film combines archival footage, cinematic interviews, and animation to preserve one of the most unique sport stories that has never been formally documented.</p>
+  <p><em>Houston Is a Hockey Town</em> is an upcoming feature documentary tracing Houston's overlooked professional hockey history. Spanning from the city's earliest teams through the WHA Aeros dynasty, through the IHL and AHL Aeros era, to the passionate community keeping the sport alive today, the film combines archival footage, cinematic interviews, and animation to preserve one of the most unique sport stories that has never been formally documented.</p>
   <p>This is a race against time. The people who lived it are aging. The archival materials are unpreserved. And the city, the fourth largest in the United States still has no NHL team.</p>
 </section>
 
@@ -444,7 +443,7 @@ footer { background:#080f18; border-top:1px solid var(--border); padding:1.8rem 
       </div>
       <div class="voice-body">
         <div class="voice-name">Peter Dineen</div>
-        <div class="voice-role">Representing Bill Dineen as Father</div>
+        <div class="voice-role">Director of Player Personnel / GM, IHL Era — Representing Bill Dineen as Father</div>
       </div>
     </div>
 
@@ -462,33 +461,6 @@ footer { background:#080f18; border-top:1px solid var(--border); padding:1.8rem 
 
   </div>
 </section>
-
-<hr class="gold-rule">
-
-<!-- PRESS -->
-<section id="press">
-  <div class="sec-lbl">Press</div>
-  <h2>Press and<br>Media</h2>
-  <div class="press-grid">
-    <a class="press-card" href="#" aria-label="Press kit">
-      <div class="press-type">Press Kit</div>
-      <div class="press-title">Official Press Kit</div>
-      <p class="press-note">Logline, synopsis, key credits, and approved stills for editors and producers.</p>
-    </a>
-    <a class="press-card" href="#" aria-label="Trailer and social assets">
-      <div class="press-type">Assets</div>
-      <div class="press-title">Trailer + Social Assets</div>
-      <p class="press-note">Download links for trailer embeds, poster art, and social-ready graphics.</p>
-    </a>
-    <a class="press-card" href="#" aria-label="Media inquiries">
-      <div class="press-type">Inquiries</div>
-      <div class="press-title">Media Contact</div>
-      <p class="press-note">For interviews and feature requests, use the contact details below.</p>
-    </a>
-  </div>
-</section>
-
-<hr class="gold-rule">
 
 <!-- DIRECTOR STATEMENT -->
 <section id="statement">
@@ -519,7 +491,7 @@ footer { background:#080f18; border-top:1px solid var(--border); padding:1.8rem 
       <div class="dir-title">Director / Producer / Writer / Editor</div>
       <p><strong>Evan Shi</strong> is a filmmaker and hockey player from Houston, Texas, where he has spent over a decade immersed in the city's hockey community. Since age three he has played across Houston's youth and competitive leagues, including the Houston Wild, the Outlaws, and currently as captain of the Memorial West Varsity High School Team and assistant captain of the ISHL varsity select Houston Apollos. Beyond playing, he is a USA Hockey certified referee, a youth coach for Memorial City House League, and has appeared in a Beijing-based hockey television production.</p>
       <p>Evan's filmmaking career began with a focus on preservation and cultural storytelling. His documentary received recognition from District 4 San José City Council-member David Cohen and the Global Asian Moon Fest red carpet event for its work documenting a gentrified Silicon Valley community. He has since directed films on endangered Chinese martial arts and currently serves as lead journalist and content creator for a nationally ranked collegiate ice hockey program, where he has built a 129-year historical archive and produced content for an audience of thousands.</p>
-      <p>Houston Is a Hockey Town represents the convergence of his two passions. His deep connection to Houston's hockey community, combined with his documentary experience, positions him to tell this story from an authentic insider perspective. This project marks his final season of competitive play in Houston as a high school senior, giving back to the community that raised him.</p>
+      <p><em>Houston Is a Hockey Town</em> represents the convergence of his two passions. His deep connection to Houston's hockey community, combined with his documentary experience, positions him to tell this story from an authentic insider perspective. This project marks his final season of competitive play in Houston as a high school senior, giving back to the community that raised him.</p>
     </div>
   </div>
 
@@ -591,7 +563,7 @@ footer { background:#080f18; border-top:1px solid var(--border); padding:1.8rem 
   <span class="footer-copy">A Film by Evan Shi &nbsp; Website coded by Evan Shi &nbsp; Currently in Production &nbsp; 2026</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function loadPhoto(input, type) {
   if (!input.files || !input.files[0]) return;
   const reader = new FileReader();
